@@ -25,7 +25,7 @@ echo "Cloning my xmodmap configuration from GitHub in ~/$INSTALL_DIR"
 git clone https://github.com/taringamberini/my-xmodmap-configuration.git ~/$INSTALL_DIR
 
 echo -n "Creating symlink ... "
-ln -s ~/$INSTALL_DIR/xmodmaprc ~/.xmodmaprc
+ln -s ~/$INSTALL_DIR/xmodmaprc-laptop-keyboard ~/.xmodmaprc
 echo "success"
 
 echo "xmodmap installation completed :-)"

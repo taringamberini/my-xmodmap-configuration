@@ -1,0 +1,39 @@
+! Thanks to Xah Lee http://xahlee.info/kbd/linux_swap_modifier_keys.html
+
+! In order to discover the keysym of interesting keys, at command line run:
+!
+!     $ sudo apt-get install x11proto-core-dev
+!     $ egrep '#define.*XK_' /usr/include/X11/keysymdef.h | egrep -i "alt|control|escape|caps"
+!
+!     #define XK_Escape                        0xff1b
+!     #define XK_Control_L                     0xffe3  /* Left control */
+!     #define XK_Control_R                     0xffe4  /* Right control */
+!     #define XK_Caps_Lock                     0xffe5  /* Caps lock */
+!     #define XK_Alt_L                         0xffe9  /* Left alt */
+!     #define XK_Alt_R                         0xffea  /* Right alt */
+!     #define XK_3270_AltCursor                0xfd10
+!     #define XK_signaturemark                 0x0aca  /*(U+2613 SALTIRE)*/
+!     #define XK_maltesecross                  0x0af0  /* U+2720 MALTESE CROSS */
+!
+! keysym is the string after XK_.
+!
+! In order to discover the current modifier map run (The ISO_Level3_Shift refers to the AltGr key): 
+! 
+!     $ xmodmap -pm
+!     xmodmap:  up to 4 keys per modifier, (keycodes in parentheses):
+!     
+!     shift       Shift_L (0x32),  Shift_R (0x3e)
+!     lock        Caps_Lock (0x42)
+!     control     Control_L (0x25),  Control_R (0x69)
+!     mod1        Alt_L (0x40),  Meta_L (0xcd)
+!     mod2        Num_Lock (0x4d)
+!     mod3      
+!     mod4        Super_L (0x85),  Super_R (0x86),  Super_L (0xce),  Hyper_L (0xcf)
+!     mod5        ISO_Level3_Shift (0x5c),  Mode_switch (0xcb)
+
+! Swap Escape and Caps_Lock 
+remove lock = Caps_Lock 
+keysym Caps_Lock = Escape
+keysym Escape = Caps_Lock
+add lock = Caps_Lock 
+
