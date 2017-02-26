@@ -56,6 +56,29 @@ keysym Escape = Caps_Lock
 add lock = Caps_Lock 
 
 ! Swap 7 and /
-keysym 7 = 7 slash
-keysym slash = slash 7
-
+!
+! The following command shows which keycode is mapped to keysymbols 7 and /
+! in the key map table:
+!
+!     $ xmodmap -pk | egrep "\(7\)|\(slash\)" --color
+!         16        0x0037 (7)  0x002f (slash)  0x0037 (7)  0x0026 (ampersand)  0x007b (braceleft)  0x0ac6 (seveneighths)   0x0037 (7)  0x002f (slash)  0x007b (braceleft)  0x0ac6 (seveneighths)
+!
+! In the key map table, after the first column, which show the keycode of the
+! key, there are pairs (keysym value, keysym name) of columns. Each pairs
+! refers to a keysym which is shown depending on which key, or keys combination,
+! is pressed. On my laptop's keyboard I have discovered ('man xmodmap' isn't
+! very accurate on this) that:
+! 0x0037 (7)            is shown pressing 7
+! 0x002f (slash)        is shown pressing Shift_L + 7 or Shift_R + 7
+! 0x0037 (7)
+! 0x0026 (ampersand)    is shown pressing AltGr + Shift_R + CTRL_R + 7
+! 0x007b (braceleft)    is shown pressing AltGr + 7
+! 0x0ac6 (seveneighths) is shown pressing AltGr + Shift_R + 7
+! 0x0037 (7)
+! 0x002f (slash)
+! 0x007b (braceleft)
+! 0x0ac6 (seveneighths)
+!
+! Therefore, in order to swap 7 and /, I can assign to keycode 16 a new
+! key map table record, in which only the first two keysyms are swapped:
+keycode 16 = slash 7 7 ampersand braceleft seveneighths 7 slash braceleft seveneighths
