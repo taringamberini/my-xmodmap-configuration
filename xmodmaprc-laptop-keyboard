@@ -17,7 +17,7 @@
 !
 ! keysym is the string after XK_.
 !
-! In order to discover the current modifier map run (The ISO_Level3_Shift refers to the AltGr key): 
+! In order to discover the current modifier map run:
 ! 
 !     $ xmodmap -pm
 !     xmodmap:  up to 4 keys per modifier, (keycodes in parentheses):
@@ -30,6 +30,16 @@
 !     mod3      
 !     mod4        Super_L (0x85),  Super_R (0x86),  Super_L (0xce),  Hyper_L (0xcf)
 !     mod5        ISO_Level3_Shift (0x5c),  Mode_switch (0xcb)
+!
+! where ISO_Level3_Shift refers on my keyboard to the AltGr key.
+
+! Swap Control_R and AltGr
+remove control = Control_R
+remove mod5 = ISO_Level3_Shift
+keysym Control_R = ISO_Level3_Shift
+keysym ISO_Level3_Shift = Control_R
+add control = Control_R
+add mod5 = ISO_Level3_Shift
 
 ! Swap Control_L and Alt_L
 remove control = Control_L
@@ -38,14 +48,6 @@ keysym Control_L = Alt_L
 keysym Alt_L = Control_L
 add control = Control_L
 add mod1 = Alt_L Meta_L
-
-! Swap Control_R and Alt_R
-remove control = Control_R
-remove mod5 = ISO_Level3_Shift
-keysym Control_R = ISO_Level3_Shift
-keysym ISO_Level3_Shift = Control_R
-add control = Control_R
-add mod5 = ISO_Level3_Shift
 
 ! Swap Escape and Caps_Lock 
 remove lock = Caps_Lock 
